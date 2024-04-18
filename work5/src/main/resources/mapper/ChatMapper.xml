@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yk.mapper.ChatMapper">
+
+    <select id="findContactById" resultType="com.yk.pojo.vo.UserVo">
+        select u.nickname,u.id,u.username
+        from user u
+        INNER JOIN  contact c ON u.id = c.to_userid
+        where from_userid =#{from_userid} and u.id = #{to_userid} and is_block = 0
+    </select>
+    <select id="listAllContactByUserId" resultType="com.yk.pojo.vo.UserVo">
+        select u.nickname,u.id,u.username
+        from user u
+        INNER JOIN  contact c ON u.id = c.to_userid
+        where from_userid =#{from_userid} and is_block = 0
+    </select>
+</mapper>

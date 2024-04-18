@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yk.mapper.ConversationMapper">
+    <select id="listAllGroupConversation" resultType="com.yk.pojo.Conversation">
+        select  c.id,c.last_content,c.last_content_time,c.last_sender_uid,cu.unread_num
+        from conversation c
+                 inner join con_user cu
+                 inner join user_group ug on c.to_group_id = ug.groupid and cu.user_id = ug.userid
+        where ug.userid = #{userid}
+    </select>
+    <select id="findConversation" resultType="com.yk.pojo.Conversation">
+        select c.id,c.last_content, c.last_content_time, c.last_sender_uid
+        from conversation c
+        where c.from_user_id = #{from_user_id} and c.to_user_id = #{to_user_id}
+    </select>
+    <select id="listAllConversation" resultType="com.yk.pojo.Conversation">
+        SELECT c.id, c.last_content, c.last_content_time, c.last_sender_uid
+        FROM conversation c
+        WHERE c.from_user_id = #{from_user_id} OR  c.to_user_id = #{from_user_id};
+    </select>
+    <select id="findGroupConversation" resultType="com.yk.pojo.Conversation">
+        select c.id,c.last_content,c.last_content_time,c.last_sender_uid
+        from conversation c
+        inner join con_user cu
+        inner join user_group ug on c.to_group_id = ug.groupid and cu.user_id = ug.userid
+        where c.to_group_id =#{to_group_id}
+    </select>
+</mapper>
