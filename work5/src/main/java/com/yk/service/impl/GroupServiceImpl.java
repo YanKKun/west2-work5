@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 12080
@@ -79,6 +80,11 @@ public class GroupServiceImpl implements GroupService {
             return Result.error("群不存在");
         }
         return Result.success(groupMapper.findGroupById(id));
+    }
+
+    @Override
+    public Result<List<Group>> listGroupByName(String groupName) {
+        return Result.success(groupMapper.listGroupByName(groupName));
     }
 
     @Transactional

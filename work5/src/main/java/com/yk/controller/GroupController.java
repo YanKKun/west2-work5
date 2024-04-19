@@ -55,6 +55,16 @@ public class GroupController {
     }
 
     /**
+     * 通过名称模糊查找群
+     * @param group 群对象
+     * @return 群集合
+     */
+    @GetMapping("/listGroupByName")
+    public Result listGroupByName(@Valid @RequestBody Group group){
+        return groupService.listGroupByName(group.getGroupName());
+    }
+
+    /**
      * 添加群成员
      * @param userGroupDto 用户群DTO对象
      * @return 结果集

@@ -4,6 +4,8 @@ import com.yk.pojo.Group;
 import com.yk.pojo.Result;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface GroupService {
 
@@ -35,6 +37,13 @@ public interface GroupService {
      * @return 结果集
      */
     Result<Group> findGroupById(Integer id);
+
+    /**
+     * 通过名称模糊查找群
+     * @param groupName 群名称
+     * @return 群集合
+     */
+    Result<List<Group>> listGroupByName(String groupName);
 
     /**
      * 添加用户进群

@@ -41,7 +41,7 @@ public class ChatEndpoint {
      * @param session
      */
     @OnOpen
-    public void onOpen(Session session, EndpointConfig endpointConfig) throws IOException {
+    public void onOpen(Session session) throws IOException {
         log.info("连接");
             Map<String, Object> userProperties = session.getUserProperties();
             LoginUser loginUser = (LoginUser) userProperties.get("loginUser");

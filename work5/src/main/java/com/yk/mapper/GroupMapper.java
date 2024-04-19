@@ -43,6 +43,14 @@ public interface GroupMapper {
     Group findGroupById(@Param("id")Integer id);
 
     /**
+     * 模糊查找群
+     * @param groupName 群名
+     * @return 群集合
+     */
+    @Select("select id, group_name, group_leader, member_num, create_time from `group` where group_name like concat('%', #{group_name}, '%')")
+    List<Group> listGroupByName(@Param("group_name")String groupName);
+
+    /**
      * 通过群名查找群
      * @param name 群名
      * @return 群
