@@ -96,7 +96,7 @@ public class WebSocketUtils {
         LoginUser loginUser = (LoginUser) session.getUserProperties().get("loginUser");
         Integer id = loginUser.getUser().getId();
         String nickname = loginUser.getUser().getNickname();
-        if(toUserId!=null){
+        if(toUserId!=null&&toGroupId==null){
             if(Base64.getDecoder().decode(content1)!=null){
                 content2= Base64Utils.generateImage(content1);
             }
@@ -135,7 +135,7 @@ public class WebSocketUtils {
             }else {
                 session.getBasicRemote().sendText("你没有该联系人");
             }
-        }else if(toGroupId!=null){
+        }else if(toGroupId!=null&&toUserId==null){
             if(Base64.getDecoder().decode(content1)!=null){
                 content2=Base64Utils.generateImage(content1);
             }
@@ -201,6 +201,8 @@ public class WebSocketUtils {
             }
             redisCache.setCacheObject(key2,0);
             redisCache.deleteObject(key);
+        }else {
+            session.getBasicRemote().sendText("操作有误");
         }
     }
 
